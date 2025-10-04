@@ -1,16 +1,16 @@
 <script lang="ts">
+	import { WhisperApi } from '$lib/api/whisperApi';
 	import { Alert, Button, ButtonGroup, Dropdown, Radio } from "flowbite-svelte";
 	import { ChevronDownOutline } from "flowbite-svelte-icons";
-	import AlertIcon from '$lib/components/toolbar/AlertIcon.svelte';
+	import AlertIcon from '$lib/components/whisper/toolbar/AlertIcon.svelte';
 
-	let alertSound = $state("bicycle-bell");
+	const { api }: { api: WhisperApi } = $props();
+
+	let alertSound = $state("bicycle-horn");
 	let isAlerting = $state(false);
 
 	function showAlert() {
-		isAlerting = true;
-		setTimeout(() => {
-			isAlerting = false;
-		}, 1000);
+		api.playSound(alertSound);
 	}
 </script>
 
