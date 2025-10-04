@@ -4,11 +4,11 @@
 </script>
 
 {#if alertSound === 'air-horn'}
-	<BullhornSolid class="me-2 h-5 w-5" />
+	<BullhornSolid class="me-0 h-5 w-5" />
 {/if}
 {#if alertSound === 'bicycle-horn'}
-	<BullhornOutline class="me-2 h-5 w-5" />
+	<BullhornOutline class="me-0 h-5 w-5" />
 {/if}
 {#if alertSound === 'bicycle-bell'}
-	<BellRingOutline class="me-2 h-5 w-5" />
+	<BellRingOutline class="me-0 h-5 w-5" />
 {/if}
