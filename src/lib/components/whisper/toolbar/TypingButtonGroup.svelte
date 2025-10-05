@@ -10,8 +10,10 @@
 		prefs.playTypingSound = !prefs.playTypingSound;
 	}
 
-	function typingSoundState() {
-		return prefs.playTypingSound ? 'Turn typing off' : 'Turn typing on';
+	function typingTip() {
+		return prefs.playTypingSound ?
+			'Typing sound is on (click to turn off)' :
+			'Typing sound is off (click to turn on)';
 	}
 </script>
 
@@ -21,7 +23,7 @@
 		<ChevronDownOutline class="ms-0 h-6 w-6 text-black dark:text-black" />
 	</Button>
 </ButtonGroup>
-<Tooltip type="light" triggeredBy="#typing-toggle-button">{typingSoundState()}</Tooltip>
+<Tooltip type="light" triggeredBy="#typing-toggle-button">{typingTip()}</Tooltip>
 <Tooltip type="light" triggeredBy="#show-typing-dropdown">Choose typing sound</Tooltip>
 <Dropdown simple triggeredBy="#show-typing-dropdown" class="w-44 space-y-3 p-3 text-sm">
 	<li>

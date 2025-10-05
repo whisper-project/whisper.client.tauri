@@ -11,8 +11,8 @@
 		api.playSound(prefs.alertSound);
 	}
 
-	function alertName() {
-		switch (prefs.alertSound) {
+	function alertName(sound: string): string {
+		switch (sound) {
 			case 'air-horn':
 				return 'Air Horn';
 			case 'bicycle-horn':
@@ -22,6 +22,11 @@
 			default:
 				return 'Uh Oh!';
 		}
+	}
+
+	function alertTip() {
+		const name = alertName(prefs.alertSound);
+		return `Alert sound is ${name} (click to alert)`
 	}
 </script>
 
@@ -33,7 +38,7 @@
 		<ChevronDownOutline class="ms-0 h-6 w-6 text-black dark:text-black" />
 	</Button>
 </ButtonGroup>
-<Tooltip type="light" triggeredBy="#play-alert-button">Play {alertName()}</Tooltip>
+<Tooltip type="light" triggeredBy="#play-alert-button">{alertTip()}</Tooltip>
 <Tooltip type="light" triggeredBy="#show-alert-dropdown">Choose alert sound</Tooltip>
 <Dropdown simple triggeredBy="#show-alert-dropdown" class="w-44 space-y-3 p-3 text-sm">
 	<li>

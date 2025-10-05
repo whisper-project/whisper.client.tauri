@@ -3,7 +3,7 @@
 
 	let { stop }: { stop: () => void } = $props();
 
-	let isOpen = $state(false);
+let isOpen = $state(false);
 </script>
 
 <Button id="stop-whispering-button">Stop</Button>

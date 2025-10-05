@@ -9,10 +9,12 @@
 		prefs.speakText = !prefs.speakText;
 	}
 
-	function showSpeakingState() {
-		return prefs.speakText ? 'Turn speaking off' : 'Turn speaking on';
+	function speakingTip() {
+		return prefs.speakText ?
+			'Speech is on (click to turn off)' :
+			'Speech is off (click to turn on)';
 	}
 </script>
 
 <Button color="light" onclick={toggleSpeaking}><SpeakingIcon speakText={prefs.speakText} /></Button>
-<Tooltip type="light">{showSpeakingState()}</Tooltip>
+<Tooltip type="light">{speakingTip()}</Tooltip>
