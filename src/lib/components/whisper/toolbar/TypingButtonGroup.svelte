@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { WhisperSessionPrefs } from '$lib/api/whisperApi';
-	import { Button, ButtonGroup, Dropdown, DropdownDivider, Radio } from "flowbite-svelte";
+	import { Button, ButtonGroup, Dropdown, DropdownDivider, Radio, Tooltip } from "flowbite-svelte";
 	import { ChevronDownOutline } from "flowbite-svelte-icons";
 	import TypingIcon from './TypingIcon.svelte';
 
@@ -9,15 +9,21 @@
 	function togglePlayTypingSound() {
 		prefs.playTypingSound = !prefs.playTypingSound;
 	}
+
+	function typingSoundState() {
+		return prefs.playTypingSound ? 'Turn typing off' : 'Turn typing on';
+	}
 </script>
 
 <ButtonGroup>
-	<Button onclick={togglePlayTypingSound}><TypingIcon playSound={prefs.playTypingSound} /></Button>
-	<Button id="show-alert-dropdown">
+	<Button id="typing-toggle-button" color="light" onclick={togglePlayTypingSound}><TypingIcon playSound={prefs.playTypingSound} /></Button>
+	<Button id="show-typing-dropdown" color="light">
 		<ChevronDownOutline class="ms-0 h-6 w-6 text-black dark:text-black" />
 	</Button>
 </ButtonGroup>
-<Dropdown simple triggeredBy="#show-alert-dropdown" class="w-44 space-y-3 p-3 text-sm">
+<Tooltip type="light" triggeredBy="#typing-toggle-button">{typingSoundState()}</Tooltip>
+<Tooltip type="light" triggeredBy="#show-typing-dropdown">Choose typing sound</Tooltip>
+<Dropdown simple triggeredBy="#show-typing-dropdown" class="w-44 space-y-3 p-3 text-sm">
 	<li>
 		<Radio name="soundGroup" bind:group={prefs.typingSound} value="typewriter-classic">Classic Typewriter</Radio>
 	</li>

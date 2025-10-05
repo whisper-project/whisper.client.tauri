@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { WhisperApi } from '$lib/api/whisperApi';
 	import type { WhisperSessionPrefs } from '$lib/api/whisperApi';
-	import { Button, ButtonGroup, Dropdown, Radio } from "flowbite-svelte";
+	import { Button, ButtonGroup, Dropdown, Radio, Tooltip } from "flowbite-svelte";
 	import { ChevronDownOutline } from "flowbite-svelte-icons";
 	import AlertIcon from '$lib/components/whisper/toolbar/AlertIcon.svelte';
 
@@ -10,14 +10,31 @@
 	function showAlert() {
 		api.playSound(prefs.alertSound);
 	}
+
+	function alertName() {
+		switch (prefs.alertSound) {
+			case 'air-horn':
+				return 'Air Horn';
+			case 'bicycle-horn':
+				return 'Bicycle Horn';
+			case 'bicycle-bell':
+				return 'Bicycle Bell';
+			default:
+				return 'Uh Oh!';
+		}
+	}
 </script>
 
 <ButtonGroup>
-	<Button onclick={showAlert}><AlertIcon alertSound={prefs.alertSound} /></Button>
-	<Button id="show-alert-dropdown">
+	<Button id="play-alert-button" color="light" onclick={showAlert}>
+		<AlertIcon alertSound={prefs.alertSound} />
+	</Button>
+	<Button id="show-alert-dropdown" color="light">
 		<ChevronDownOutline class="ms-0 h-6 w-6 text-black dark:text-black" />
 	</Button>
 </ButtonGroup>
+<Tooltip type="light" triggeredBy="#play-alert-button">Play {alertName()}</Tooltip>
+<Tooltip type="light" triggeredBy="#show-alert-dropdown">Choose alert sound</Tooltip>
 <Dropdown simple triggeredBy="#show-alert-dropdown" class="w-44 space-y-3 p-3 text-sm">
 	<li>
 		<Radio name="alertGroup" bind:group={prefs.alertSound} value="air-horn">Air Horn</Radio>

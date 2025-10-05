@@ -3,6 +3,7 @@
 	import type { WhisperSessionPrefs } from '$lib/api/whisperApi';
 	import AlertButtonGroupGroup from './AlertButtonGroup.svelte';
 	import TypingButtonGroup from './TypingButtonGroup.svelte';
+	import SpeakingButton from './SpeakingButton.svelte';
 	import StopButton from './StopButton.svelte';
 
 	let { api, prefs = $bindable(), stop }:
@@ -14,6 +15,7 @@
 	<div class="flex items-center space-x-2">
 		<AlertButtonGroupGroup api={api} bind:prefs={prefs} />
 		<TypingButtonGroup bind:prefs={prefs} />
+		<SpeakingButton bind:prefs={prefs} />
 		<StopButton stop={stop} />
 	</div>
 </div>

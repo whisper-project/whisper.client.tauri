@@ -9,16 +9,18 @@ import typewriterModernUrl from './typewriter-modern.mp3';
 
 export interface WhisperSessionPrefs {
 	alertSound: string;
-	typingSound: string;
 	playTypingSound: boolean;
+	speakText: boolean;
+	typingSound: string;
 	typingSoundVolume: string;
 }
 
 const prefDefaults: WhisperSessionPrefs = {
 	alertSound: 'bicycle-horn',
-	typingSound: 'typewriter-classic',
 	playTypingSound: false,
-	typingSoundVolume: 'half'
+	speakText: false,
+	typingSound: 'typewriter-classic',
+	typingSoundVolume: 'half',
 };
 
 export class WhisperApi {
