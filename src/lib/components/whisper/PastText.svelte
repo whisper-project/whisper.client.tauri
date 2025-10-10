@@ -1,12 +1,14 @@
 <script lang="ts">
-	let { text } = $props();
+	import { WhisperApi } from '$lib/api/whisperApi';
+	const { api }: { api: WhisperApi } = $props();
+	const pastText = api.getPastTextStore()
 </script>
 
-<div class="flex-1 p-6 bg-white overflow-hidden">
+<div class="flex-1 p-3 bg-white overflow-hidden">
 	<div class="w-full h-full overflow-y-auto">
-		{#if text}
+		{#if $pastText}
 			<div class="text-gray-800 text-base leading-relaxed whitespace-pre-wrap">
-				{text}
+				{$pastText}
 			</div>
 		{:else}
 			<div class="text-gray-400 italic">

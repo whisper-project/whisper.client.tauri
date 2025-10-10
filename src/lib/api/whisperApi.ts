@@ -1,7 +1,6 @@
 import { Howl } from 'howler';
 import type { Readable, Writable } from 'svelte/store';
 import { readonly, writable } from 'svelte/store';
-import { randomUUID } from 'node:crypto';
 
 import type { Conversation, Listener, Session } from './common';
 
@@ -40,7 +39,7 @@ export class WhisperApi {
 
 	constructor(conversation: Conversation) {
 		this.session = {
-			id: randomUUID(),
+			id: crypto.randomUUID(),
 			conversation: conversation,
 			whisperer: conversation.owner,
 			listeners: [],
@@ -61,7 +60,7 @@ export class WhisperApi {
 		WhisperApi.sessionPrefs = { ...prefs };
 	}
 
-	getListenerStore(): Readable<Listener[]> {
+	getListeners(): Readable<Listener[]> {
 		return readonly(this.listeners);
 	}
 
