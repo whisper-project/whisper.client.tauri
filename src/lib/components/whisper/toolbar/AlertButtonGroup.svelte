@@ -4,12 +4,31 @@
 	import { Button, ButtonGroup, Dropdown, Radio, Tooltip } from "flowbite-svelte";
 	import { ChevronDownOutline } from "flowbite-svelte-icons";
 	import AlertIcon from '$lib/components/whisper/toolbar/AlertIcon.svelte';
+	import type { Writable } from 'svelte/store';
 
-	const { api, prefs = $bindable() }: { api: WhisperApi, prefs: WhisperSessionPrefs } = $props();
+	const { api, prefs = $bindable(), giveFocus }:
+		{ api: WhisperApi, prefs: WhisperSessionPrefs, giveFocus: Writable<number> }
+		= $props();
+
+	function resignFocus() {
+		giveFocus.update((old) => old + 1);
+	}
 
 	function showAlert() {
 		api.playSound(prefs.alertSound);
+		resignFocus();
 	}
+
+	let areChoicesOpen = $state(false);
+	let wereChoicesOpen = $state(false);
+	$effect(() => {
+		if (wereChoicesOpen !== areChoicesOpen) {
+			wereChoicesOpen = areChoicesOpen;
+			if (!areChoicesOpen) {
+				resignFocus();
+			}
+		}
+	})
 
 	function alertName(sound: string): string {
 		switch (sound) {
@@ -40,7 +59,11 @@
 </ButtonGroup>
 <Tooltip type="light" triggeredBy="#play-alert-button">{alertTip()}</Tooltip>
 <Tooltip type="light" triggeredBy="#show-alert-dropdown">Choose alert sound</Tooltip>
-<Dropdown simple triggeredBy="#show-alert-dropdown" class="w-44 space-y-3 p-3 text-sm">
+<Dropdown simple
+					bind:isOpen={areChoicesOpen}
+					triggeredBy="#show-alert-dropdown"
+					class="w-44 space-y-3 p-3 text-sm"
+>
 	<li>
 		<Radio name="alertGroup" bind:group={prefs.alertSound} value="air-horn">Air Horn</Radio>
 	</li>

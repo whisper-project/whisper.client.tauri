@@ -72,6 +72,25 @@ export class WhisperApi {
 		return this.liveText;
 	}
 
+	clearLiveText() {
+		if (this.session.liveText) {
+			this.session.liveText = '';
+			this.liveText.set(this.session.liveText);
+		}
+	}
+
+	repeatLastPastText() {
+		const lines = this.session.pastText.split('\n');
+		let line = lines.pop();
+		while (line !== undefined && line.length == 0) {
+			line = lines.pop();
+		}
+		if (line !== undefined) {
+			this.session.pastText += '\n' + line;
+			this.pastText.set(this.session.pastText);
+		}
+	}
+
 	playSound(sound: string) {
 		let url = uhOhUrl;
 		switch (sound) {
@@ -110,7 +129,11 @@ export class WhisperApi {
 		}
 		if (newText === oldText + '\n') {
 			this.session.liveText = '';
-			this.session.pastText = this.session.pastText + '\n' + oldText;
+			if (this.session.pastText) {
+				this.session.pastText = this.session.pastText + '\n' + oldText;
+			} else {
+				this.session.pastText = oldText;
+			}
 			this.pastText.set(this.session.pastText);
 		} else {
 			this.session.liveText = newText;
