@@ -5,7 +5,7 @@
 
 	const { api }: { api: WhisperApi } = $props();
 	let listeners = api.getListeners();
-	const listenerCount = derived(listeners, ($listeners) => $listeners.length);
+	const listenerCount = derived(listeners, (val) => val.length);
 </script>
 
 {#if $listenerCount > 1}
