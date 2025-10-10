@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { WhisperApi } from '$lib/api/whisperApi';
-	import { type Component, tick } from 'svelte';
+	import { tick } from 'svelte';
 
 	const { api }: { api: WhisperApi } = $props();
 	const pastText = api.getPastTextStore()
