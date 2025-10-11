@@ -1,13 +1,32 @@
 <script lang="ts">
-	import type { WhisperSessionPrefs } from '$lib/api/whisperApi';
-	import { Button, ButtonGroup, Dropdown, DropdownDivider, Radio, Tooltip } from "flowbite-svelte";
-	import { ChevronDownOutline } from "flowbite-svelte-icons";
+	import { type WhisperSessionPrefs } from '$lib/api/whisperApi';
+	import { Button, ButtonGroup, Dropdown, DropdownDivider, Radio, Tooltip } from 'flowbite-svelte';
+	import { ChevronDownOutline } from 'flowbite-svelte-icons';
 	import TypingIcon from './TypingIcon.svelte';
+	import type { Writable } from 'svelte/store';
 
-	const { prefs = $bindable() }: { prefs: WhisperSessionPrefs } = $props();
+	const { prefs = $bindable(), giveFocus }:
+		{ prefs: WhisperSessionPrefs, giveFocus: Writable<number> }
+		= $props();
+
+	function resignFocus() {
+		giveFocus.update((old) => old + 1);
+	}
+
+	let areChoicesOpen = $state(false);
+	let wereChoicesOpen = $state(false);
+	$effect(() => {
+		if (wereChoicesOpen !== areChoicesOpen) {
+			wereChoicesOpen = areChoicesOpen;
+			if (!areChoicesOpen) {
+				resignFocus();
+			}
+		}
+	})
 
 	function togglePlayTypingSound() {
 		prefs.playTypingSound = !prefs.playTypingSound;
+		resignFocus();
 	}
 
 	function typingTip() {
@@ -25,7 +44,11 @@
 </ButtonGroup>
 <Tooltip type="light" triggeredBy="#typing-toggle-button">{typingTip()}</Tooltip>
 <Tooltip type="light" triggeredBy="#show-typing-dropdown">Choose typing sound</Tooltip>
-<Dropdown simple triggeredBy="#show-typing-dropdown" class="w-44 space-y-3 p-3 text-sm">
+<Dropdown simple
+					bind:isOpen={areChoicesOpen}
+					triggeredBy="#show-typing-dropdown"
+					class="w-44 space-y-3 p-3 text-sm"
+>
 	<li>
 		<Radio name="soundGroup" bind:group={prefs.typingSound} value="typewriter-classic">Classic Typewriter</Radio>
 	</li>
