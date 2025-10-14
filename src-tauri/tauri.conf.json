@@ -1,6 +1,6 @@
 {
 	"$schema": "https://schema.tauri.app/config/2",
-	"productName": "Whisper",
+	"productName": "WhisperTauriTest",
 	"version": "0.1.0",
 	"identifier": "io.clickonetwo.whisper.tauri.test",
 	"build": {
@@ -12,7 +12,7 @@
 	"app": {
 		"windows": [
 			{
-				"title": "Whisper",
+				"title": "WhisperTauriTest",
 				"width": 800,
 				"height": 600,
 				"resizable": true,
@@ -24,6 +24,18 @@
 		}
 	},
 	"bundle": {
+		"iOS": {
+			"developmentTeam": "9BJ65G9LZ5"
+		},
+		"macOS": {
+			"signingIdentity": "3rd Party Mac Developer Application: ClickOneTwo Consulting LLC (9BJ65G9LZ5)",
+			"minimumSystemVersion": "12.0",
+			"entitlements": "./Entitlements.plist",
+			"files": {
+				"embedded.provisionprofile": "/Users/dbrotsky/.appstoreconnect/profiles/WhisperTauriTest_Provisioning_Profile.provisionprofile"
+			}
+		},
+		"category": "Utility",
 		"active": true,
 		"targets": "all",
 		"icon": [
