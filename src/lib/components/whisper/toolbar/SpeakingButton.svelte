@@ -4,9 +4,10 @@
 	import SpeakingIcon from './SpeakingIcon.svelte';
 	import type { Writable } from 'svelte/store';
 
-	const { prefs = $bindable(), giveFocus }:
-		{ prefs: WhisperSessionPrefs, giveFocus: Writable<number> }
-		= $props();
+	const {
+		prefs = $bindable(),
+		giveFocus
+	}: { prefs: WhisperSessionPrefs; giveFocus: Writable<number> } = $props();
 
 	function resignFocus() {
 		giveFocus.update((old) => old + 1);
@@ -18,9 +19,9 @@
 	}
 
 	function speakingTip() {
-		return prefs.speakText ?
-			'Speech is on (click to turn off)' :
-			'Speech is off (click to turn on)';
+		return prefs.speakText
+			? 'Speech is on (click to turn off)'
+			: 'Speech is off (click to turn on)';
 	}
 </script>
 

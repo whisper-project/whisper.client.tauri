@@ -9,5 +9,9 @@
 <Button>Stop</Button>
 <Dropdown simple bind:isOpen>
 	<DropdownItem onclick={stop}>Stop Listening</DropdownItem>
-	<DropdownItem onclick={() => {isOpen = false}}>Continue Listening</DropdownItem>
+	<DropdownItem
+		onclick={() => {
+			isOpen = false;
+		}}>Continue Listening</DropdownItem
+	>
 </Dropdown>

@@ -12,7 +12,7 @@
 			name: 'me',
 			id: 'my-id'
 		}
-	})
+	});
 
 	function stop() {
 		mode = 'home';
@@ -20,9 +20,9 @@
 </script>
 
 {#if mode === 'whisper'}
-	<WhisperView conversation={conversation} stop={stop} />
+	<WhisperView {conversation} {stop} />
 {:else if mode === 'listen'}
-	<ListenView stop={stop} />
+	<ListenView {stop} />
 {:else}
-	<ChoiceView bind:mode={mode} bind:conversation={conversation} />
+	<ChoiceView bind:mode bind:conversation />
 {/if}

@@ -8,6 +8,6 @@
 
 <ResizablePanelGroup direction="vertical" className="h-full">
 	<ResizablePanel defaultSize={100} minSize={70}>
-		<Toolbar stop={stop} />
+		<Toolbar {stop} />
 	</ResizablePanel>
 </ResizablePanelGroup>

@@ -3,7 +3,7 @@
 	import { Button, Tooltip } from 'flowbite-svelte';
 	import type { Writable } from 'svelte/store';
 
-	const { api, giveFocus }: { api: WhisperApi, giveFocus: Writable<number> } = $props();
+	const { api, giveFocus }: { api: WhisperApi; giveFocus: Writable<number> } = $props();
 
 	function repeatLastPastText() {
 		api.repeatLastPastText();

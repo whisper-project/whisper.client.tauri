@@ -2,7 +2,7 @@
 	import type { Writable } from 'svelte/store';
 	import { Button, Dropdown, DropdownItem, Tooltip } from 'flowbite-svelte';
 
-	let { stop, giveFocus }: { stop: () => void, giveFocus: Writable<number> } = $props();
+	let { stop, giveFocus }: { stop: () => void; giveFocus: Writable<number> } = $props();
 
 	function resignFocus() {
 		giveFocus.update((old) => old + 1);
@@ -17,7 +17,7 @@
 				resignFocus();
 			}
 		}
-	})
+	});
 
 	function closeDropdown() {
 		isOpen = false;

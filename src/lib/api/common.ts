@@ -11,7 +11,7 @@ export interface Listener {
 export interface Conversation {
 	name: string;
 	id: string;
-	owner: Whisperer
+	owner: Whisperer;
 }
 
 export interface Session {
